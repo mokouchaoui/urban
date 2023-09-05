@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+{% block title %}Walmart Products
+{% endblock %}
+{% block main_content %}
+	{% include 'components/modal.html.twig' with {
+    'modal_id': 'retireModal',
+    'modal_title': 'Retire selected item?',
+    'modal_content': 'Retiring an item will remove it from the site and unpublish it permanently. After you retire an item, please allow up to 48 hours for your request to be processed',
+    'modal_action': true,
+    'modal_input': true,
+    'modal_action_label': 'Retire',
+    'modal_action_close': 'Cancel',
+	'modal_input_id': 'skuInput',
+
+} %}
+
+	<div class="row align-items-center mb-3">
+		<div class="col-sm mb-2 mb-sm-0">
+			<h1 class="page-header-title">Products
+				<span class="badge bg-soft-dark text-dark ms-2">{{count}}</span>
+			</h1>
+		</div>
+		<div class="col-sm-auto">
+			<a class="btn btn-dark" href="/product/create">Add product</a>
+		</div>
+		<form method="get" action="{{ path('products') }}">
+			<select class="form-select" name="publishedStatus" onchange="this.form.submit()">
+				<option value="" {{ currentStatus == '' ? 'selected' : '' }}>ALL</option>
+				<option value="PUBLISHED" {{ currentStatus == 'PUBLISHED' ? 'selected' : '' }}>Published</option>
+				<option value="UNPUBLISHED" {{ currentStatus == 'UNPUBLISHED' ? 'selected' : '' }}>Unpublished</option>
+				<option value="SYSTEM_PROBLEM" {{ currentStatus == 'SYSTEM_PROBLEM' ? 'selected' : '' }}>SYSTEM_PROBLEM</option>
+				<!-- Add more statuses if needed -->
+			</select>
+		</form>
+	</div>
+	<!-- Table -->
+	<div class="table-responsive datatable-custom">
+		<table id="datatable" class="table table-dark table-hover">
+			<thead class="thead-light">
+				<tr>
+					<th>Image</th>
+					<th>Item name</th>
+					<th>SKU</th>
+					<th>Price</th>
+					<th>Inventory</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			{% for item in productsWithInventory %}
+
+
+				<tbody>
+					<tr>
+						<td>
+							{% if item.productSearch %}<img class="product-img" src="{{ item.productSearch }}">
+							{% endif %}
+						</td>
+						<td>{{ item.product.productName|length > 25 ? item.product.productName|slice(0, 25) ~ '...' : item.product.productName }}</td>
+						<td>{{ item.product.sku }}</td>
+						<td>{{ item.product.price.amount }}
+							{{ item.product.price.currency }}</td>
+						<td>{{ item.inventory.quantity.amount }}</td>
+						<td>{{ item.product.publishedStatus }}</td>
+						{% if item.product.publishedStatus == 'PUBLISHED'%}
+							<td>
+								<div class="dropdown">
+									<button class="btn btn-dark dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+										...
+									</button>
+									<ul class="dropdown-menu">
+										<li>
+											<a class="dropdown-item" href="{{path('add_inventory',{id:item.product.sku})}}">Edit item</a>
+										</li>
+										<li>
+											<a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#retireModal" data-entity-id="{{ item.product.sku }}">Retire item</a>
+										</li>
+									</ul>
+								</div>
+							</td>
+						{% else %}
+							<td>
+								<a class="btn btn-danger">Error</a>
+							</td>
+						{% endif %}
+					</tr>
+				</tbody>
+			{% endfor %}
+		</table>
+	</div>
+	<!-- End Table -->
+	{% for message in app.flashes('success') %}
+		{% include 'components/modal.html.twig' with {
+    'modal_id': 'openModal',
+    'modal_title': 'Success',
+    'modal_content': message,
+    'modal_action': false,
+    'modal_input': false,
+    'modal_action_label': 'Retire',
+    'modal_action_close': 'Close',
+} %}
+	{% endfor %}
+	{% for message in app.flashes('error') %}
+		{% include 'components/modal.html.twig' with {
+    'modal_id': 'openModal',
+    'modal_title': 'Error',
+    'modal_content': message,
+    'modal_action': false,
+    'modal_input': false,
+    'modal_action_label': 'Retire',
+    'modal_action_close': 'Close',
+} %}
+	{% endfor %}
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+var modal = document.getElementById('retireModal');
+
+modal.addEventListener('show.bs.modal', function (event) {
+var button = event.relatedTarget;
+var sku = button.getAttribute('data-entity-id');
+document.getElementById('skuInput').value = sku;
+});
+var myModal = new bootstrap.Modal(document.getElementById('openModal'));
+myModal.show();
+});
+	</script>
+
+
+{% endblock %}
+
+{% block body %}{% endblock %}

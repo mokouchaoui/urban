@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Product{% endblock %}
+{% block main_content %}
+<div class="container">
+    <h1 class="title">
+    Add product
+    </h1>
+</div>
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col">{{ form_row(form.mpItem.Orderable.sku) }}</div>
+        <div class="col">{{ form_row(form.mpItem.Orderable.productName) }}</div>
+        <div class="col">{{ form_row(form.mpItem.Visible.jewelry.shortDescription) }}</div>
+    </div>
+    <div class="row">
+        <div class="mb-3">{{ form_row(form.mpItem.Orderable.productIdentifiers) }}</div>
+    </div>
+    <div class="row">
+        <div class="col">{{ form_row(form.mpItem.Orderable.brand) }}</div>
+        <div class="col">{{ form_row(form.mpItem.Orderable.price) }}</div>
+        <div class="col">{{ form_row(form.mpItem.Orderable.mustShipAlone) }}</div>
+    </div>
+    <div class="row">
+        <div class="col">{{ form_row(form.mpItem.Orderable.skuUpdate) }}</div>
+        <div class="col" type="number">{{ form_row(form.mpItem.Orderable.shippingWeight) }}</div>
+        <div class="col">{{ form_row(form.mpItem.Visible.jewelry.gender) }}</div>
+    </div>
+    <div class="row">
+        <div class="col">{{ form_row(form.mpItem.Visible.jewelry.size) }}</div>
+        <div class="col">{{ form_row(form.mpItem.Visible.jewelry.color) }}</div>
+        <div class="col">{{ form_row(form.mpItem.Visible.jewelry.metal) }}</div>
+    </div>
+        <div class="row">
+            <div class="col">{{ form_row(form.mpItem.Visible.jewelry.mainImageUrl) }}</div>
+            <div class="col">{{ form_row(form.mpItem.Visible.jewelry.productSecondaryImageURL) }}</div>
+        </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </div>
+    </div>
+{{ form_end(form) }}
+
+
+<!-- Bootstrap Modal -->
+{% if app.session.has('feedId') %}
+    <!-- Modal HTML -->
+    <div class="modal fade" id="feedIdModal" tabindex="-1" aria-labelledby="feedIdModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedIdModalLabel">Product posted successfully</h5>
+                </div>
+                <div class="modal-body">
+                    Feed ID: {{ app.session.get('feedId') }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="window.location.href='/clearfeedid'">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to automatically show the modal -->
+   <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var myModal = new bootstrap.Modal(document.getElementById('feedIdModal'));
+        myModal.show();
+    });
+    </script>
+{% endif %} 
+{% endblock %}
+{% block body %}
+    
+{% endblock %}

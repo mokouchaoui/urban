@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Inventory{% endblock %}
+
+{% block main_content %}
+    <h1>Edit Product</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-dark" type="submit">Add Inventory</button>
+    {{ form_end(form) }}
+
+
+{% for message in app.flashes('success') %}
+    {% include 'components/modal.html.twig' with {
+    'modal_id': 'successModal',
+    'modal_title': 'Success',
+    'modal_content': message,
+    'modal_action': false,
+    'modal_input': false,
+    'modal_action_label': 'Retire',
+    'modal_action_close': 'Close',
+} %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+        myModal.show();
+    });
+    </script>
+{% endfor %}
+
+
+{% endblock %}

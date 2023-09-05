@@ -1,0 +1,26 @@
+{# templates/components/modal.html.twig #}
+
+<div class="modal fade" id="{{ modal_id }}" tabindex="-1" aria-labelledby="{{ modal_id }}Label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="{{ modal_id }}Label">{{ modal_title }}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{{ modal_content }}
+			</div>
+			<div class="modal-footer">
+				<form action="/removeitem " method="post" id="retireForm">
+                    {% if modal_input %}
+					<input type="hidden" name="sku" id="{{modal_input_id}}">
+                    {% endif %}
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{modal_action_close}}</button>
+                    {% if modal_action %}
+					<button type="submit" class="btn btn-danger">{{ modal_action_label }}</button>
+                    {% endif %}
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

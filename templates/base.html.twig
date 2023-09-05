@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('build/app.css')}}">
+$			<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
+			<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css'>
+		{% endblock %}
+
+	</head>
+	<body>
+		<div class="page-wrapper chiller-theme toggled">
+			<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+				<i class="fas fa-bars"></i>
+			</a>
+			<nav id="sidebar" class="sidebar-wrapper">
+				<div class="sidebar-content">
+					<div class="sidebar-brand">
+						<a href="/">
+            <img class="logo" src="{{asset('images/logo.png')}}" alt="">
+            WAlmart Api</a>
+						<div id="close-sidebar">
+							<i class="fas fa-times"></i>
+						</div>
+					</div>
+					<div class="sidebar-header">
+						<div class="user-pic">
+							<img class="img-responsive img-rounded" src="{{asset('images/user.png')}}" alt="User picture">
+						</div>
+						<div class="user-info">
+							<span class="user-name">Jhon
+								<strong>Doe</strong>
+							</span>
+							<span class="user-role">Administrator</span>
+							<span class="user-status">
+								<i class="fa fa-circle"></i>
+								<span>Online</span>
+							</span>
+						</div>
+					</div>
+					<div class="sidebar-menu">
+						<ul>
+							<li class="header-menu">
+								<span>General</span>
+							</li>
+							<li class="sidebar-dropdown">
+								<a>
+									<i class="fa fa-shopping-cart"></i>
+									<span>E-commerce</span>
+									<span class="badge badge-pill badge-danger">2</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li><a href="/">List products</a></li>
+										<li><a class="btn-dark" href="/product/create">Add Product</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<main class="page-content"> {% block main_content %}{% endblock %}
+				</main>
+			</div>
+			{% block javascripts %}
+				<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"></script>
+				{{ encore_entry_script_tags('app') }}
+			{% endblock %}
+		</body>
+	</html>

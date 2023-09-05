@@ -1,0 +1,44 @@
+{
+    "MPItemFeedHeader": {
+        "sellingChannel": "marketplace",
+        "processMode": "REPLACE",
+        "subset": "EXTERNAL",
+        "locale": "en",
+        "version": "4.8"
+    },
+    "MPItem": [
+        {
+            "Orderable": {
+                "sku": "ztest",
+                "productIdentifiers": {
+                    "productIdType": "ISBN",
+                    "productId": "100"
+                },
+                "productName": "test",
+                "brand": "test",
+                "price": 10,
+                "ShippingWeight": 10,
+                "MustShipAlone": "Yes",
+                "SkuUpdate": "Yes"
+            },
+            "Visible": {
+                "Jewelry": {
+                    "shortDescription": "te",
+                    "mainImageUrl": "http:\/\/h",
+                    "productSecondaryImageURL": [
+                        "http:\/\/3"
+                    ],
+                    "gender": "Male",
+                    "size": "10",
+                    "color": [
+                        "Blue"
+                    ],
+                    "metal": "Platinum",
+                    "keyFeatures": [
+                        "@generated"
+                    ]
+                }
+            }
+        }
+    ]
+}
