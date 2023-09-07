@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "highsidelabs/walmart-api": "^0.7.0",
