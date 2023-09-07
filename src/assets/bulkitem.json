@@ -9,27 +9,27 @@
     "MPItem": [
         {
             "Orderable": {
-                "sku": "ztest",
+                "sku": "test",
                 "productIdentifiers": {
                     "productIdType": "ISBN",
-                    "productId": "100"
+                    "productId": "11"
                 },
-                "productName": "test",
-                "brand": "test",
-                "price": 10,
-                "ShippingWeight": 10,
+                "productName": "tes",
+                "brand": "tes",
+                "price": 11,
+                "ShippingWeight": 12,
                 "MustShipAlone": "Yes",
                 "SkuUpdate": "Yes"
             },
             "Visible": {
                 "Jewelry": {
-                    "shortDescription": "te",
-                    "mainImageUrl": "http:\/\/h",
+                    "shortDescription": "tes",
+                    "mainImageUrl": "http:\/\/test",
                     "productSecondaryImageURL": [
-                        "http:\/\/3"
+                        "http:\/\/tes"
                     ],
                     "gender": "Male",
-                    "size": "10",
+                    "size": "11",
                     "color": [
                         "Blue"
                     ],
